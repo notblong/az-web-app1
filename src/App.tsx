@@ -12,24 +12,34 @@ function App() {1
   const emailRegex = new RegExp('/\S+@\S+\.\S+/');
   
   useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = () => {
     axios.get('https://pblo-api-app1.azurewebsites.net/users')
       .then(response => {
         setUsers(response.data)
       })
       .catch(error => console.log(error));
-  }, []);
+  }
 
-
+  const add = () => {
+    axios.post('https://pblo-api-app1.azurewebsites.net/users', { name, username, email })
+      .then(response => {
+        setUsers(response.data)
+      })
+      .catch(error => console.log(error));
+  }
   return (
     <>
       <div className="App">
         <TextInput placeholder='Name' onChange={(event) => setName(event.target.value)} />
         <TextInput placeholder='User Name' onChange={(event) => setUsername(event.target.value)} />
         <TextInput placeholder='Email' onChange={(event) => setEmail(event.target.value)}/>
-        <Button onClick={() => console.log("clicked")}>
+        <Button onClick={add}>
           Submit
         </Button>
-        <Button onClick={() => console.log("clicked")}>
+        <Button onClick={getUsers}>
           Refresh data
         </Button>
         <Card>
