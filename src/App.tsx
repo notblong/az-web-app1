@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import './App.css'
 import { UsersTable } from './table'
+import api1 from './apis/api1'
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -16,13 +17,13 @@ function App() {
   }, []);
 
   const getUsers = () => {
-    axios.get(`${import.meta.env.VITE_API_1_ENDPOINT}/users`)
+    api1.get(`users?subscription-key=${import.meta.env.VITE_API_1_SUBSCRIPTION_KEY}`)
       .then(response => setUsers(response.data))
       .catch(error => console.log(error));
   }
 
   const add = () => {
-    axios.post(`${import.meta.env.VITE_API_1_ENDPOINT}/users`, { name, username, email })
+    axios.post(`users?subscription-key=${import.meta.env.VITE_API_1_SUBSCRIPTION_KEY}`, { name, username, email })
       .then(response => setUsers(response.data))
       .catch(error => console.log(error));
   }
