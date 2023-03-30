@@ -1,9 +1,9 @@
-import { Button, Card, TextInput } from '@tremor/react'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
-import './App.css'
-import { UsersTable } from './table'
-import api1 from './apis/api1'
+import { Button, Callout, Card, TextInput } from '@tremor/react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import api1 from './apis/api1';
+import './App.css';
+import { UsersTable } from './table';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -31,17 +31,28 @@ function App() {
   return (
     <>
       <div className="App">
-        <form className='form' onSubmit={(e) => {e.preventDefault(); add()}} >
-          <TextInput placeholder='Name' onChange={(event) => setName(event.target.value)} />
-          <TextInput placeholder='User Name' onChange={(event) => setUsername(event.target.value)} />
-          <TextInput placeholder='Email' onChange={(event) => setEmail(event.target.value)}/>
-          <Button type="submit">
-            Submit
-          </Button>
-        </form>
-        <Button onClick={getUsers}>
-          Refresh data
-        </Button>
+        <Callout
+          className="mt-4"
+          title="Notifications"
+          color="teal"
+        >
+          All systems are currently within their default operating ranges.
+        </Callout>
+        <br />
+        <Card>
+          <form className='form' onSubmit={(e) => {e.preventDefault(); add()}} >
+            <TextInput placeholder='Name' onChange={(event) => setName(event.target.value)} />
+            <TextInput placeholder='User Name' onChange={(event) => setUsername(event.target.value)} />
+            <TextInput placeholder='Email' onChange={(event) => setEmail(event.target.value)}/>
+            <Button type="submit">
+              Submit
+            </Button>
+            <Button onClick={getUsers}>
+              Refresh data
+            </Button>
+          </form>
+        </Card>
+        <br />
         <Card>
           <UsersTable users={users} />
         </Card>
