@@ -23,8 +23,8 @@ function App() {
   }
 
   const add = () => {
-    axios.post(`users?subscription-key=${import.meta.env.VITE_API_1_SUBSCRIPTION_KEY}`, { name, username, email })
-      .then(response => setUsers(response.data))
+    api1.post(`users?subscription-key=${import.meta.env.VITE_API_1_SUBSCRIPTION_KEY}`, { name, username, email })
+      .then(resp => getUsers())
       .catch(error => console.log(error));
   }
 
@@ -40,14 +40,14 @@ function App() {
         </Callout>
         <br />
         <Card>
-          <form className='form' onSubmit={(e) => {e.preventDefault(); add()}} >
+          <form className='form' onSubmit={(e) => { e.preventDefault(); add()}} >
             <TextInput placeholder='Name' onChange={(event) => setName(event.target.value)} />
             <TextInput placeholder='User Name' onChange={(event) => setUsername(event.target.value)} />
             <TextInput placeholder='Email' onChange={(event) => setEmail(event.target.value)}/>
             <Button type="submit">
               Submit
             </Button>
-            <Button onClick={getUsers}>
+            <Button onClick={(e) => { e.preventDefault(); getUsers(); }}>
               Refresh data
             </Button>
           </form>
