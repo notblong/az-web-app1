@@ -39,12 +39,12 @@ function App() {
 
 
   const connectSignalR = async () => {
-    // const connectionInfo = await axios.get('http://localhost:7071/api/negotiate');
-    // console.log('connectionInfo', connectionInfo);
+    const connectionInfo = await axios.get(`${import.meta.env.VITE_API_SIGNALR_NEGOTIATE_FUNCTION}`);
+    console.log('connectionInfo', connectionInfo);
     
     const connect = new HubConnectionBuilder()
-      .withUrl("https://pblo-app1-signalr.service.signalr.net/client/?hub=app1signalr", {
-        accessTokenFactory: () => 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ii0yMDAyOTEwNjQ4In0.eyJhc3JzLnMuYXV0IjoiV2ViSm9ic0F1dGhMZXZlbCIsIm5iZiI6MTY4MDI2MDYwMCwiZXhwIjoxNjgwMjY0MjAwLCJpYXQiOjE2ODAyNjA2MDAsImF1ZCI6Imh0dHBzOi8vcGJsby1hcHAxLXNpZ25hbHIuc2VydmljZS5zaWduYWxyLm5ldC9jbGllbnQvP2h1Yj1hcHAxc2lnbmFsciJ9.2MvuoUNcr9ie2esphKjKJYvgf654RZ0Mo2jgS6NIZjM',
+      .withUrl(connectionInfo.data.url, {
+        accessTokenFactory: () => connectionInfo.data.accessToken,
         skipNegotiation: true,
         transport: HttpTransportType.WebSockets,
         })
