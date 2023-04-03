@@ -31,13 +31,14 @@ function App() {
           connection.on(`generatedDocument`, (message) => {
             console.log(message);
             const uuid = message;
-            toast.success(() => (
-              <span>Generated! Click 
+            toast.success((t) => (
+              <span>Click 
                 <b>
                   <a href={`${import.meta.env.VITE_API_1_ENDPOINT}/docs?subscription-key=${import.meta.env.VITE_API_1_SUBSCRIPTION_KEY}&uuid=${uuid}`}> here</a>
                 </b> to download document
+                <button onClick={() => toast.dismiss(t.id)}>✖</button>
               </span>), {
-              duration: 6000,
+              duration: Infinity,
             });
           });
         })
