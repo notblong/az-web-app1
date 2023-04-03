@@ -27,7 +27,7 @@ export enum NotificationStatus {
 
 export function UsersTable({ users }: { users: User[] }) {
   const [btns, setBtns] = useState({} as any);
-  const notify = (user: User) => toast(() => (<span>Document for <b>{user.username}</b> is generating.Please wait for minutes... </span>), { icon: '💬'});
+  const notify = (user: User) => toast(() => (<span>Document for <b>{user.username}</b> is generating.Please wait for minutes... </span>), { icon: '💬', duration: 4000});
 
   const checkDoc = async (uuid: string) => {
     const resp = await api1.get(`docs/check?subscription-key=${import.meta.env.VITE_API_1_SUBSCRIPTION_KEY}&uuid=${uuid}`);

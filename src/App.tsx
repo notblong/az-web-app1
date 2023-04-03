@@ -30,7 +30,15 @@ function App() {
         .then(() => {
           connection.on(`generatedDocument`, (message) => {
             console.log(message);
-            toast(`Document ${message} is created!`);
+            const uuid = message;
+            toast.success(() => (
+              <span>Generated! Click 
+                <b>
+                  <a href={`${import.meta.env.VITE_API_1_ENDPOINT}/docs?subscription-key=${import.meta.env.VITE_API_1_SUBSCRIPTION_KEY}&uuid=${uuid}`}> here</a>
+                </b> to download document
+              </span>), {
+              duration: 6000,
+            });
           });
         })
         .catch((error) => console.log(error));
@@ -71,15 +79,7 @@ function App() {
   return (
     <>
       <div className="App">
-        {/* <ToastContainer />  */}
-        <Toaster />
-        <Callout
-          className="mt-4"
-          title="Notifications"
-          color="teal"
-        >
-          All systems are currently within their default operating ranges.
-        </Callout>
+        <Toaster position="top-right"/>
         <br />
         <Card>
           <form className='form' onSubmit={(e) => { e.preventDefault(); add()}} >
