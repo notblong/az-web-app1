@@ -39,7 +39,8 @@ function App() {
 
 
   const connectSignalR = async () => {
-    const connectionInfo = await axios.get(`${import.meta.env.VITE_API_SIGNALR_NEGOTIATE_FUNCTION}`);
+    const connectionInfo = await axios
+      .get(`${import.meta.env.VITE_API_SIGNALR_NEGOTIATE_FUNCTION}`);
     console.log('connectionInfo', connectionInfo);
     
     const connect = new HubConnectionBuilder()
@@ -51,6 +52,7 @@ function App() {
       .withAutomaticReconnect()
       .build();
 
+    console.log('SignalR connection: ', connect);
     setConnection(connect);
   }
 
