@@ -25,8 +25,12 @@ export enum NotificationStatus {
   done = 'done',
 }
 
+interface BtnLoadingState {
+  [uuid: string]: boolean;
+}
+
 export function UsersTable({ users }: { users: User[] }) {
-  const [btns, setBtns] = useState({} as any);
+  const [btns, setBtns] = useState({} as BtnLoadingState);
   const notify = (user: User) => toast((t) => (<span>Document for <b>{user.username}</b> is generating.Please wait for minutes...
     <button onClick={() => toast.dismiss(t.id)}>✖</button></span>),
     { icon: '💬', duration: Infinity });
